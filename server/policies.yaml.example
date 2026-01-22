@@ -1,0 +1,88 @@
+# ============================================================================
+# SudoMode Policy Configuration Example
+# ============================================================================
+# 
+# Copy this file to policies.yaml and customize for your needs:
+#   cp policies.yaml.example policies.yaml
+#
+# This file defines governance rules that SudoMode uses to evaluate
+# AI agent actions. Rules are evaluated in order - FIRST MATCH WINS.
+#
+# Rule Structure:
+#   - name: Unique identifier for the rule
+#   - description: Human-readable description
+#   - resource: Resource pattern to match (e.g., "database", "stripe.charge")
+#   - action: Action pattern to match (e.g., "read", "delete", "charge")
+#   - condition: (Optional) Python expression using args, resource, action
+#   - decision: "ALLOW", "DENY", or "REQUIRE_APPROVAL"
+#   - reason: Message shown to users when this rule matches
+#
+# ============================================================================
+
+rules:
+  # Example 1: Allow read operations on database
+  # This rule automatically approves all read operations
+  - name: "allow_database_read"
+    description: "Allow read actions on database resources"
+    resource: "database"
+    action: "read"
+    decision: "ALLOW"
+    reason: "Read operations are safe and allowed"
+
+  # Example 2: Require approval for high-value Stripe charges
+  # This rule requires human approval for charges over $100
+  - name: "require_approval_high_stripe_charge"
+    description: "Require human approval for Stripe charges over $100"
+    resource: "stripe.charge"
+    action: "charge"
+    condition: "args.amount > 100"
+    decision: "REQUIRE_APPROVAL"
+    reason: "High-value charge ($100+) requires human approval"
+
+  # Default rule: Deny everything else
+  # This is a safety measure - only explicitly allowed actions proceed
+  - name: "default_deny"
+    description: "Default deny all unmatched requests"
+    resource: "*"
+    action: "*"
+    decision: "DENY"
+    reason: "No matching policy found - default deny"
+
+# ============================================================================
+# More Rule Examples (Uncomment and customize as needed)
+# ============================================================================
+
+# # Block destructive database operations
+# - name: "deny_database_delete"
+#   description: "Block delete actions on database resources"
+#   resource: "database"
+#   action: "delete"
+#   decision: "DENY"
+#   reason: "Delete operations on database are forbidden"
+
+# # Auto-approve low-value charges
+# - name: "allow_low_amount_charge"
+#   description: "Allow Stripe charges of $100 or less"
+#   resource: "stripe.charge"
+#   action: "charge"
+#   condition: "args.amount <= 100"
+#   decision: "ALLOW"
+#   reason: "Low-value charge is automatically approved"
+
+# # Require approval for AWS operations
+# - name: "require_approval_aws"
+#   description: "Require approval for all AWS operations"
+#   resource: "aws.*"
+#   action: "*"
+#   decision: "REQUIRE_APPROVAL"
+#   reason: "AWS operations require human approval"
+
+# # Allow specific user actions
+# - name: "allow_user_read"
+#   description: "Allow reading user data"
+#   resource: "user"
+#   action: "read"
+#   condition: "args.user_id == 'admin'"
+#   decision: "ALLOW"
+#   reason: "Admin user read access allowed"
+
