@@ -1,3 +1,8 @@
+
+![Logo_SudoMode](https://github.com/user-attachments/assets/2c9de1cb-ea5e-477e-bd26-c155728fdbe6)
+
+
+
 # 🛡️ SudoMode
 
 > **The Missing `sudo` Command for AI Agents**
@@ -343,7 +348,7 @@ Built with:
 
 - **Issues:** [GitHub Issues](https://github.com/yourusername/sudomode-ai/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/yourusername/sudomode-ai/discussions)
-- **Email:** [Your email]
+- **Email:** Info.namansharma001@gmail.com
 
 ---
 
