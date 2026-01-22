@@ -99,9 +99,9 @@ graph LR
 git clone https://github.com/yourusername/sudomode-ai.git
 cd sudomode-ai
 
-# Backend
+# Backend Server
 cd server
-python3.11 -m venv venv
+python3.11 -m venv venv  # Python 3.11 or 3.12 recommended
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
@@ -109,9 +109,10 @@ pip install -r requirements.txt
 cd ../dashboard
 npm install
 
-# SDK
+# SDK (Client Library)
 cd ../sdk
 pip install -r requirements.txt
+# Or install as package: pip install -e .
 ```
 
 ### Step 2: Define Your Policy
@@ -163,8 +164,10 @@ cd dashboard
 npm run dev
 ```
 
-Server runs at `http://localhost:8000`  
-Dashboard runs at `http://localhost:5173`
+**Server:** `http://localhost:8000`  
+**Dashboard:** `http://localhost:5173`
+
+**Note:** Python 3.11 or 3.12 is recommended. Python 3.14 has compatibility issues with pydantic-core.
 
 ### Step 4: Use in Your Agent
 
@@ -250,10 +253,41 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 📚 Documentation
 
-- **[Getting Started Guide](GETTING_STARTED.md)** - Detailed setup instructions
 - **[API Documentation](http://localhost:8000/docs)** - Full API reference (when server is running)
-- **[SDK Examples](sdk/examples/)** - More code examples
-- **[Policy Reference](server/policies.yaml)** - Policy configuration guide
+- **[SDK Examples](sdk/examples/)** - More code examples including `demo_agent.py` and `bank_agent.py`
+- **[Policy Reference](server/policies.yaml.example)** - Policy configuration guide
+- **[Contributing Guide](CONTRIBUTING.md)** - How to contribute to SudoMode
+
+## 🔧 SDK Installation
+
+Install the SDK as a package:
+
+```bash
+cd sdk
+pip install -e .
+```
+
+Or use directly:
+
+```bash
+cd sdk
+pip install -r requirements.txt
+python examples/demo_agent.py
+```
+
+## 🖥️ Dashboard Features
+
+The React dashboard provides:
+- **Real-time Updates** - Automatically polls the backend API every 2 seconds
+- **Dark Theme** - Cyberpunk/enterprise security aesthetic
+- **Request Management** - View, approve, or reject pending governance requests
+- **Risk Indicators** - Visual badges showing risk levels
+- **Responsive Design** - Works on desktop and mobile devices
+
+**API Endpoints Used:**
+- `GET /v1/requests` - Fetch all requests
+- `POST /v1/requests/{id}/approve` - Approve a request
+- `POST /v1/requests/{id}/reject` - Reject a request
 
 ---
 
@@ -272,6 +306,21 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 - Monitor the dashboard for suspicious activity
 - Use strong authentication for the dashboard
 - Keep SudoMode server secure
+- Never commit `.env` files with real API keys
+
+## 🔔 Slack Integration (Optional)
+
+To enable Slack notifications:
+
+1. Create a Slack app at https://api.slack.com/apps
+2. Enable "Incoming Webhooks"
+3. Add webhook to your workspace
+4. Create `server/.env`:
+   ```bash
+   SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+   ```
+
+When an action requires approval, SudoMode will automatically send a formatted alert to your Slack channel.
 
 ---
 

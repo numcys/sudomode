@@ -50,8 +50,10 @@ yarn-error.log*
 
 # Build outputs
 dist/
+dist-ssr/
 build/
 *.log
+*.local
 
 # Testing
 .pytest_cache/
