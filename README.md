@@ -13,6 +13,8 @@
 
 **Stop your AI Agent from draining your bank account.** SudoMode is a middleware proxy that intercepts high-risk actions and enforces human approval before execution. Your agent sends intents, we hold the keys.
 
+ **☁️ Hosted Cloud:** Don't want to self-host? [Join the SudoMode Cloud Waitlist](https://forms.gle/LzsMBGyvDtCvFMjn6)
+
 ---
 
 ## 🎬 Demo
