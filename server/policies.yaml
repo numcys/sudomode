@@ -1,0 +1,71 @@
+# ============================================================================
+# SudoMode Policy Configuration
+# ============================================================================
+# 
+# This file defines the governance rules that SudoMode uses to evaluate
+# AI agent actions. Rules are evaluated in order, and the FIRST MATCHING
+# rule wins (subsequent rules are not checked).
+#
+# Rule Structure:
+#   - name: Unique identifier for the rule
+#   - description: Human-readable description
+#   - resource: Resource pattern to match (e.g., "database", "stripe.charge")
+#   - action: Action pattern to match (e.g., "read", "delete", "charge")
+#   - condition: (Optional) Python expression using args, resource, action
+#   - decision: "ALLOW", "DENY", or "REQUIRE_APPROVAL"
+#   - reason: Message shown to users when this rule matches
+#
+# Pattern Matching:
+#   - Use "*" to match any resource or action
+#   - Exact string matching for specific resources/actions
+#
+# Conditions:
+#   - Use Python expressions that evaluate to True/False
+#   - Access request data via: args, resource, action
+#   - Example: "args.amount > 50"
+#
+# ============================================================================
+
+rules:
+  # Rule 1: Allow read operations on database
+  - name: "allow_database_read"
+    description: "Allow read actions on database resources"
+    resource: "database"
+    action: "read"
+    decision: "ALLOW"
+    reason: "Read operations are safe and allowed"
+
+  # Rule 2: Block delete operations on database
+  - name: "deny_database_delete"
+    description: "Block delete actions on database resources"
+    resource: "database"
+    action: "delete"
+    decision: "DENY"
+    reason: "Delete operations on database are forbidden"
+
+  # Rule 3: Require approval for stripe.charge if amount > 50
+  - name: "require_approval_high_amount_charge"
+    description: "Require human approval for stripe charges over $50"
+    resource: "stripe.charge"
+    action: "charge"
+    condition: "args.amount > 50"
+    decision: "REQUIRE_APPROVAL"
+    reason: "High-value charge requires human approval"
+
+  # Rule 4: Allow stripe.charge if amount <= 50
+  - name: "allow_low_amount_charge"
+    description: "Allow stripe charges of $50 or less"
+    resource: "stripe.charge"
+    action: "charge"
+    condition: "args.amount <= 50"
+    decision: "ALLOW"
+    reason: "Low-value charge is automatically approved"
+
+  # Default rule: Deny everything else
+  - name: "default_deny"
+    description: "Default deny all unmatched requests"
+    resource: "*"
+    action: "*"
+    decision: "DENY"
+    reason: "No matching policy found - default deny"
+
