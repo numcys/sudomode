@@ -260,20 +260,20 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 🔧 SDK Installation
 
-Install the SDK as a package:
-
-```bash
-cd sdk
-pip install -e .
-```
-
-Or use directly:
+Install the SDK dependencies:
 
 ```bash
 cd sdk
 pip install -r requirements.txt
+```
+
+The `demo_agent.py` script automatically handles Python path setup, so you can run it directly:
+
+```bash
 python examples/demo_agent.py
 ```
+
+**Note:** If you want to install the SDK as a package, you can use `pip install -e .`, but `pip install -r requirements.txt` is sufficient for most use cases.
 
 ## 🖥️ Dashboard Features
 

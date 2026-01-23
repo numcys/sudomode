@@ -67,21 +67,23 @@ python -c "from app.main import app; print('✅ Server imports successful')"
 # Navigate to SDK directory
 cd ../sdk
 
-# Install SDK as a package (recommended method)
+# Install SDK dependencies (recommended method)
+pip install -r requirements.txt
+
+# Verify SDK import works (demo_agent.py handles path setup)
+python -c "import sys; sys.path.insert(0, '.'); from sudomode import SudoClient; print('✅ SDK import successful')"
+```
+
+**Alternative SDK Setup (if you want package install):**
+```bash
+# Install SDK as a package (requires setup.py fix for README.md)
 pip install -e .
 
 # Verify SDK import works
 python -c "from sudomode import SudoClient; print('✅ SDK import successful')"
 ```
 
-**Alternative SDK Setup (if pip install -e . fails):**
-```bash
-# Install SDK dependencies only
-pip install -r requirements.txt
-
-# Test import (should work with sys.path in demo_agent.py)
-python -c "import sys; sys.path.insert(0, '.'); from sudomode import SudoClient; print('✅ SDK import successful')"
-```
+**Note:** The `demo_agent.py` script automatically adds the SDK directory to Python path, so `pip install -r requirements.txt` is sufficient.
 
 ### Step 4: Dashboard Setup (Frontend)
 ```bash

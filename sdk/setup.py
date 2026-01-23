@@ -1,8 +1,21 @@
 """Setup configuration for SudoMode SDK"""
 from setuptools import setup, find_packages
+from pathlib import Path
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
+# Try to read README.md, fallback to description if not found
+try:
+    readme_path = Path(__file__).parent / "README.md"
+    if readme_path.exists():
+        long_description = readme_path.read_text(encoding="utf-8")
+    else:
+        # Fallback: try root README.md
+        root_readme = Path(__file__).parent.parent / "README.md"
+        if root_readme.exists():
+            long_description = root_readme.read_text(encoding="utf-8")
+        else:
+            long_description = "Governance SDK for AI agents - The missing sudo command for AI"
+except Exception:
+    long_description = "Governance SDK for AI agents - The missing sudo command for AI"
 
 setup(
     name="sudomode",

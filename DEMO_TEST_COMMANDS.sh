@@ -113,13 +113,13 @@ echo "----------------------------------------"
 
 cd ../sdk
 
-# Install SDK as package
-echo "Installing SDK as package..."
-pip install -e . --quiet
+# Install SDK dependencies
+echo "Installing SDK dependencies..."
+pip install -r requirements.txt --quiet
 
-# Verify import
+# Verify import (demo_agent.py handles path setup)
 echo "Testing SDK import..."
-python -c "from sudomode import SudoClient; print('✅ SDK import successful')" || {
+python -c "import sys; sys.path.insert(0, '.'); from sudomode import SudoClient; print('✅ SDK import successful')" || {
     echo "❌ SDK import failed"
     exit 1
 }
