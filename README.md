@@ -1,3 +1,8 @@
+
+![Logo_SudoMode](https://github.com/user-attachments/assets/2c9de1cb-ea5e-477e-bd26-c155728fdbe6)
+
+
+
 # 🛡️ SudoMode
 
 > **The Missing `sudo` Command for AI Agents**
@@ -8,18 +13,13 @@
 
 **Stop your AI Agent from draining your bank account.** SudoMode is a middleware proxy that intercepts high-risk actions and enforces human approval before execution. Your agent sends intents, we hold the keys.
 
+ **☁️ Hosted Cloud:** Don't want to self-host? [Join the SudoMode Cloud Waitlist](https://forms.gle/LzsMBGyvDtCvFMjn6)
+
 ---
-
-## 🎬 Demo
-
-**[Insert 30s Loom Video Here]**
 
 **Quick Install:**
 ```bash
-pip install sudomode
-# or
-git clone https://github.com/yourusername/sudomode-ai.git
-cd sudomode-ai
+git clone https://github.com/numcys/sudomode.git
 ```
 
 ---
@@ -96,8 +96,7 @@ graph LR
 ### Step 1: Clone & Install
 
 ```bash
-git clone https://github.com/yourusername/sudomode-ai.git
-cd sudomode-ai
+git clone https://github.com/numcys/sudomode.git
 
 # Backend Server
 cd server
@@ -234,7 +233,7 @@ except BlockingIOError as e:
 - [ ] Integration with CI/CD pipelines
 - [ ] Compliance reporting (SOC2, GDPR)
 
-**Have a feature request?** [Open an issue](https://github.com/yourusername/sudomode-ai/issues)
+**Have a feature request?** [Open an issue](https://github.com/numcys/sudomode/issues)
 
 ---
 
@@ -341,9 +340,9 @@ Built with:
 
 ## 💬 Community
 
-- **Issues:** [GitHub Issues](https://github.com/yourusername/sudomode-ai/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/yourusername/sudomode-ai/discussions)
-- **Email:** [Your email]
+- **Issues:** [GitHub Issues](https://github.com/numcys/sudomode/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/numcys/sudomode/discussions)
+- **Email:** Info.namansharma001@gmail.com
 
 ---
 
