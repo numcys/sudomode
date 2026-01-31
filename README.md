@@ -3,7 +3,7 @@
 
 
 
-# 🛡️ SudoMode
+# SudoMode
 
 > **The Missing `sudo` Command for AI Agents**
 
@@ -11,9 +11,9 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 
-**Stop your AI Agent from draining your bank account.** SudoMode is a middleware proxy that intercepts high-risk actions and enforces human approval before execution. Your agent sends intents, we hold the keys.
+**Stop your AI Agent from causing unintended consequences.** SudoMode is a middleware proxy that intercepts high-risk actions and enforces human approval before execution. Your agent sends intents, we hold the keys.
 
- **☁️ Hosted Cloud:** Don't want to self-host? [Join the SudoMode Cloud Waitlist](https://forms.gle/LzsMBGyvDtCvFMjn6)
+**Hosted Cloud:** Don't want to self-host? [Join the SudoMode Cloud Waitlist](https://forms.gle/LzsMBGyvDtCvFMjn6)
 
 ---
 
@@ -24,23 +24,23 @@ git clone https://github.com/numcys/sudomode.git
 
 ---
 
-## ⚠️ The Problem
+## The Problem
 
-**AI Agents are dangerous.** Prompt injection is real. You can't trust an LLM with `db.drop_table()` or `stripe.charge(amount=999999)`. 
+**AI Agents can be dangerous.** Prompt injection is real. You can't trust an LLM with `db.drop_table()` or `stripe.charge(amount=999999)`. 
 
 Your agent has **direct access** to:
-- 💳 Payment APIs (Stripe, PayPal)
-- 🗄️ Databases (SQL, MongoDB)
-- ☁️ Cloud Services (AWS, GCP)
-- 🔐 Authentication Systems
+- Payment APIs (Stripe, PayPal)
+- Databases (SQL, MongoDB)
+- Cloud Services (AWS, GCP)
+- Authentication Systems
 
-**One prompt injection, one bug, one hallucination = catastrophic damage.**
+**One prompt injection, one bug, one hallucination can lead to catastrophic damage.**
 
 ---
 
-## ✅ The Solution
+## The Solution
 
-**SudoMode holds the keys.** Your agent only sends **intents** (what it *wants* to do). We:
+**SudoMode holds the keys.** Your agent only sends **intents** (what it wants to do). We:
 
 1. **Intercept** the action before execution
 2. **Evaluate** it against your policy rules
@@ -52,7 +52,7 @@ Your agent has **direct access** to:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```mermaid
 graph LR
@@ -78,20 +78,20 @@ graph LR
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-- 🛡️ **Intent-Based Policy** - Define rules in YAML. No code changes needed.
-- ⏸️ **Long-Polling Execution** - Agent pauses and waits for approval automatically.
-- ⚡ **Real-time Dashboard** - React UI for monitoring and approving requests.
-- 🔔 **Slack Integration** - Get notified instantly when approval is needed.
-- 🐍 **Python SDK** - One-line integration: `sudo.execute(resource, action, args)`
-- 🔒 **Fail-Safe Default** - Default deny. Only explicitly allowed actions proceed.
-- 📊 **Request Tracking** - Full audit trail of all governance decisions.
-- 🚀 **Zero Config** - Works out of the box with sensible defaults.
+- **Intent-Based Policy** - Define rules in YAML. No code changes needed.
+- **Long-Polling Execution** - Agent pauses and waits for approval automatically.
+- **Real-time Dashboard** - React UI for monitoring and approving requests.
+- **Slack Integration** - Get notified instantly when approval is needed.
+- **Python SDK** - One-line integration: `sudo.execute(resource, action, args)`
+- **Fail-Safe Default** - Default deny. Only explicitly allowed actions proceed.
+- **Request Tracking** - Full audit trail of all governance decisions.
+- **Zero Config** - Works out of the box with sensible defaults.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Step 1: Clone & Install
 
@@ -207,9 +207,9 @@ except BlockingIOError as e:
 
 ---
 
-## 📋 Roadmap
+## Roadmap
 
-### ✅ Current Features
+### Current Features
 - [x] Policy engine with YAML configuration
 - [x] Python SDK with long-polling
 - [x] Real-time React dashboard
@@ -217,7 +217,7 @@ except BlockingIOError as e:
 - [x] Request tracking and audit trail
 - [x] RESTful API
 
-### 🚧 Coming Soon
+### Coming Soon
 - [ ] Docker Compose setup
 - [ ] Hosted cloud version
 - [ ] Webhook callbacks for approvals
@@ -227,7 +227,7 @@ except BlockingIOError as e:
 - [ ] Go/TypeScript SDKs
 - [ ] Policy versioning and rollback
 
-### 💡 Future Ideas
+### Future Ideas
 - [ ] AI-powered risk scoring
 - [ ] Automated policy suggestions
 - [ ] Integration with CI/CD pipelines
@@ -250,14 +250,14 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 - **[API Documentation](http://localhost:8000/docs)** - Full API reference (when server is running)
 - **[SDK Examples](sdk/examples/)** - More code examples including `demo_agent.py` and `bank_agent.py`
 - **[Policy Reference](server/policies.yaml.example)** - Policy configuration guide
 - **[Contributing Guide](CONTRIBUTING.md)** - How to contribute to SudoMode
 
-## 🔧 SDK Installation
+## SDK Installation
 
 Install the SDK as a package:
 
@@ -274,7 +274,7 @@ pip install -r requirements.txt
 python examples/demo_agent.py
 ```
 
-## 🖥️ Dashboard Features
+## Dashboard Features
 
 The React dashboard provides:
 - **Real-time Updates** - Automatically polls the backend API every 2 seconds
@@ -290,15 +290,15 @@ The React dashboard provides:
 
 ---
 
-## 🔐 Security
+## Security
 
 **SudoMode is security-first:**
 
-- ✅ Default deny policy (fail-safe)
-- ✅ Policy evaluation before execution
-- ✅ Human-in-the-loop for high-risk actions
-- ✅ Full audit trail
-- ✅ No agent code changes required
+- Default deny policy (fail-safe)
+- Policy evaluation before execution
+- Human-in-the-loop for high-risk actions
+- Full audit trail
+- No agent code changes required
 
 **But remember:** SudoMode is a tool, not a silver bullet. Always:
 - Review your policies regularly
@@ -307,7 +307,7 @@ The React dashboard provides:
 - Keep SudoMode server secure
 - Never commit `.env` files with real API keys
 
-## 🔔 Slack Integration (Optional)
+## Slack Integration (Optional)
 
 To enable Slack notifications:
 
@@ -323,13 +323,13 @@ When an action requires approval, SudoMode will automatically send a formatted a
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 Built with:
 - [FastAPI](https://fastapi.tiangolo.com/) - Modern Python web framework
@@ -338,7 +338,7 @@ Built with:
 
 ---
 
-## 💬 Community
+## Community
 
 - **Issues:** [GitHub Issues](https://github.com/numcys/sudomode/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/numcys/sudomode/discussions)
@@ -346,6 +346,6 @@ Built with:
 
 ---
 
-**Made with ❤️ for safer AI agents**
+**Made for safer AI agents**
 
-**Stop trusting. Start governing.** 🛡️
+**Stop trusting. Start governing.**

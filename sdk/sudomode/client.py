@@ -1,8 +1,29 @@
-"""SudoMode Client SDK - Python wrapper for governance API"""
+"""SudoMode Client SDK - Python wrapper for governance API
+
+This module provides a client for interacting with the SudoMode governance server.
+It handles policy evaluation, approval workflows, and request management.
+"""
 import httpx
 import time
+import logging
 from typing import Dict, Any, Optional
 from pydantic import BaseModel
+
+# Configure logging
+logger = logging.getLogger("sudomode.client")
+logger.addHandler(logging.NullHandler())
+
+def configure_logging(level=logging.INFO):
+    """Configure logging for the SudoMode client.
+    
+    Args:
+        level: Logging level (default: logging.INFO)
+    """
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter('%(asctime)s [%(levelname)s] [SudoMode] %(message)s')
+    handler.setFormatter(formatter)
+    logger.setLevel(level)
+    logger.addHandler(handler)
 
 class GovernanceResponse(BaseModel):
     """Response model matching the server API"""
@@ -102,26 +123,32 @@ class SudoClient:
             raise PermissionError(f"Permission denied: {result.reason}")
         elif result.status == "REQUIRE_APPROVAL":
             if not result.request_id:
-                raise ValueError("Approval required but no request_id returned")
+                error_msg = "Approval required but no request_id returned"
+                logger.error(error_msg)
+                raise ValueError(error_msg)
                 
-            print(f"⏳ SudoMode: Paused. Waiting for approval (ID: {result.request_id})...")
+            logger.info(f"Action requires approval. Request ID: {result.request_id}")
+            logger.info(f"Polling for approval status every {poll_interval} seconds...")
             
             while True:
                 time.sleep(poll_interval)
                 try:
                     status_data = self.get_request_status(result.request_id)
                     if status_data["status"] == "APPROVED":
-                        print("✅ Approved!")
+                        logger.info(f"Request {result.request_id} approved")
                         return True
                     elif status_data["status"] == "REJECTED":
                         reason = status_data.get('reason', 'No reason provided')
-                        print(f"❌ Denied by human: {reason}")
+                        error_msg = f"Request {result.request_id} was rejected: {reason}"
+                        logger.warning(error_msg)
                         raise PermissionError(f"Action was rejected by human: {reason}")
                     # If still pending, continue the loop
                 except httpx.HTTPStatusError as e:
                     if e.response.status_code == 404:
-                        print("❌ Request not found on server")
-                        raise PermissionError("Approval request was not found on the server")
+                        error_msg = f"Request {result.request_id} not found on server"
+                        logger.error(error_msg)
+                        raise PermissionError("Approval request was not found on the server") from e
+                    logger.error(f"HTTP error checking request status: {e}")
                     raise  # Re-raise other HTTP errors
     
     def close(self):
