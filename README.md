@@ -17,6 +17,11 @@
 
 ---
 
+## 🎬 Demo
+
+https://github.com/user-attachments/assets/76a4b4c6-79ce-4af8-a771-d32e53fcc7bd
+
+
 **Quick Install:**
 ```bash
 git clone https://github.com/numcys/sudomode.git
