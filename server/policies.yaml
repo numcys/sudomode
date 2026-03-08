@@ -61,6 +61,33 @@ rules:
     decision: "ALLOW"
     reason: "Low-value charge is automatically approved"
 
+  # Rule 5: Auto-approve small refunds ($20 or less)
+  - name: "allow_small_refund"
+    description: "Auto-approve refunds of $20 or less"
+    resource: "payment"
+    action: "issue_refund"
+    condition: "args.amount <= 20"
+    decision: "ALLOW"
+    reason: "Low-value refund auto-approved"
+
+  # Rule 6: Require manager approval for mid-range refunds ($20-$100)
+  - name: "require_approval_mid_refund"
+    description: "Require human approval for refunds between $20 and $100"
+    resource: "payment"
+    action: "issue_refund"
+    condition: "args.amount > 20 and args.amount <= 100"
+    decision: "REQUIRE_APPROVAL"
+    reason: "Mid-value refund requires manager approval"
+
+  # Rule 7: Hard deny refunds over $100 (triggers threat analysis)
+  - name: "deny_high_refund"
+    description: "Hard deny refunds over $100"
+    resource: "payment"
+    action: "issue_refund"
+    condition: "args.amount > 100"
+    decision: "DENY"
+    reason: "Hard limit exceeded — refunds over $100 are blocked"
+
   # Default rule: Deny everything else
   - name: "default_deny"
     description: "Default deny all unmatched requests"

@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = True
+        extra = "ignore"
 
     def get_policies_path(self) -> Path:
         """Get the absolute path to the policies file"""

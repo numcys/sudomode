@@ -8,6 +8,7 @@ from app.core.config import settings
 from app.core.store import add_request, get_request, get_all_requests, update_request_status, remove_request
 from app.api.models import GovernanceRequest, GovernanceResponse
 from app.services.slack import SlackService
+from app.api.simulation import router as simulation_router
 
 # Load environment variables
 load_dotenv()
@@ -22,12 +23,7 @@ app = FastAPI(
 # Add CORS middleware to allow frontend requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",  # Vite default port
-        "http://localhost:3000",  # Alternative port
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -38,6 +34,9 @@ engine = PolicyEngine()
 
 # Initialize Slack service
 slack_service = SlackService(webhook_url=settings.SLACK_WEBHOOK_URL)
+
+# Register simulation router
+app.include_router(simulation_router)
 
 @app.get("/health")
 async def health_check():
