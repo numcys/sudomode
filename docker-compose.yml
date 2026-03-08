@@ -4,8 +4,8 @@ services:
   backend:
     build: ./server
     container_name: sudomode-backend
-    env_file:
-      - ./server/.env
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
     ports:
       - "8000:8000"
     restart: unless-stopped
